@@ -10,48 +10,44 @@
 
 @interface Calculator : NSObject
 
-// Accumulator
-- (void) setAccumulator: (double) value;
-- (void) clear;
-- (void) accumulator;
-
 // Interactions
 - (void)add:(float)value;
 - (void)subtract:(float)value;
 - (void)multiply:(float)value;
 - (void)divide:(float)value;
+- (void)printSelf;
 
 @end
 
 
 @implementation Calculator {
-    float sum;
+    float currentValue;
 }
 
 // public (declared in interface)
 
-- (void)addition:(float)a {
-    sum = sum + a;
+- (void)add:(float)a {
+    currentValue = currentValue + a;
 }
 
-- (void)subtraction:(float)b {
-    subtraction = b;
+- (void)subtract:(float)b {
+    currentValue = currentValue - b;
 }
+
+- (void)multiply:(float)c {
+    currentValue = currentValue * c;
+}
+
+- (void)divide:(float)d {
+    currentValue = currentValue / d;
+}
+
 
 - (void)printSelf {
-    // "n/d"
-    NSString *description = [NSString stringWithFormat:@"%g/%g", numerator, denominator];
-    NSLog(@"%@", description);
+    NSString *answer = [NSString stringWithFormat:@"%g", add];
+    NSLog(@"%@", answer);
 }
 
-- (void)divide {
-    NSLog(@"%g", numerator / denominator);
-}
-
-// private (not declared in interface)
-- (void)doAnotherThing {
-    // do a thing
-}
 
 @end
 
@@ -59,13 +55,18 @@
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
-        Fraction *f = [[Fraction alloc] init];
-        [f setNumerator:5];
+        Calculator *deskCalc = [[Calculator alloc] init];
         
-        [f setDenominator:3];
+        [deskCalc add:5];
+        [deskCalc subtract:5];
+        [deskCalc multiply:5];
+        [deskCalc divide:5];
+    
         
-        [f printSelf];
-        [f divide];
+         [deskCalc printSelf];
+        
+//        NSLog (@"The result is %g", [deskCalc accumulator]);
+
         
     }
     return 0;
